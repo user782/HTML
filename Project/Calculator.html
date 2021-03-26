@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript">
+            function calculate(type) {
+                var stop = false
+                var num1 = document.getElementById("text1").value;
+                var num2 = document.getElementById("text2").value;
+                if (num1 == ""||isNaN(num1)||num2 == ""||isNaN(num2)) {
+                    alert("不是数字！")
+                    var stop = true
+                }
+                if (stop == false) {
+                    var num1 = Number(num1)
+                    var num2 = Number(num2)
+                    if (type == "jiaf") {
+                        document.getElementById("ans").innerHTML = num1 + num2;
+                    }
+                    if (type == "jian") {
+                        document.getElementById("ans").innerHTML = num1 - num2;
+                    }
+                    if (type == "chen") {
+                        document.getElementById("ans").innerHTML = num1 * num2;
+                    }
+                    if (type == "chuf") {
+                        document.getElementById("ans").innerHTML = num1 / num2;
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            第一个数字:
+            <input type="text" id="text1" /><br />
+            第二个数字:
+            <input type="text" id="text2" /><br />
+            <input type="button" onclick='calculate("jiaf")' value="加法" />
+            <input type="button" onclick='calculate("jian")' value="减法" />
+            <input type="button" onclick='calculate("chen")' value="乘法" />
+            <input type="button" onclick='calculate("chuf")' value="除法" /><br />
+        结果：<br />
+        <p id="ans"></p>
+        </form>
+    </body>
+</html>
