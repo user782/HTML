@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+        var songlist = [];
+        var urllist = [];
+        function play(url) {
+            document.body.innerHTML = "";
+            document.write("<form>");
+            document.write("    音乐短链:");
+            document.write("    <input type='text' id='URL' value=" + url + " />");
+            document.write("    <input type='button' value='播放' onclick='play(document.getElementById(\"URL\").value)' />");
+            document.write("</form>");
+            document.write("<audio controls='controls'>");
+            document.write("    <source src=" + url + ">");
+            document.write("    你的浏览器可能不支持此元素");
+            document.write("</audio>");
+            document.write("<br>");
+            document.write("<form>");
+            document.write("    <input type='button' value='返回' onclick='back()' />");
+            document.write("    <input type='button' value='添加到歌单' onclick='addsong()' />");
+            document.write("</form>");
+            document.write("<a target='_blank' href=" + url + ">音频原网址</a>");
+        }
+        function createlink() {
+            var id = prompt("请输入网易云音乐ID(单曲简介网址中?id=后的数字)：");
+            document.getElementById("result").innerHTML = "结果:https://music.163.com/song/media/outer/url?id=" + id + ".mp3";
+        }
+        function back() {
+            document.body.innerHTML = "";
+            document.write("<form>");
+            document.write("    音乐短链:");
+            document.write("    <input type='text' id='URL' />");
+            document.write("    <input type='button' value='播放' onclick='play(document.getElementById(\"URL\").value)' />");
+            document.write("    <input type='button' value='网易云音乐获取链接' onclick='createlink()' />");
+            document.write("    <input type='button' value='歌单' onclick='showsongs()' />")
+            document.write("</form>");
+            document.write("<p id='result'></p>");
+        }
+        function showsongs() {
+            document.body.innerHTML = "";
+            for (var i = 0;i < songlist.length;) {
+                document.write((i + 1) + " "  + songlist[i] + "   url:" + urllist[i]);
+                document.write("<button onclick='play(\"" + urllist[i] + "\")'>播放</button><br />");
+                i++;
+            }
+            document.write("<button onclick='back()'>返回</button>");
+        }
+        function addsong() {
+            var name = prompt("请输入音乐名称：");
+            songlist.unshift(name);
+            urllist.unshift(document.getElementById("URL").value);
+        }
+        </script>
+    </head>
+    <body>
+        <form>
+            音乐短链:
+            <input type='text' id='URL' />
+            <input type='button' value='播放' onclick='play(document.getElementById("URL").value)' />
+            <input type='button' value='网易云音乐获取链接' onclick='createlink()' />
+            <input type='button' value='歌单' onclick='showsongs()' />
+        </form>
+        <p id='result'></p>
+    </body>
+</html>
